@@ -16,7 +16,7 @@ landing = document(
       style(<<~STYLE
       STYLE
       ),
-      title("Augmented Engineering UG - Software Engineering & Research")
+      title("Augmented Engineering UG. Software Engineering & Research")
     ),
     body({class: "bg-white text-gray-900 antialiased"},
 
@@ -61,12 +61,16 @@ landing = document(
 
       footer({class: "max-w-4xl mx-auto space-y-12 px-4 border-t border-gray-200 text-center text-gray-600 sticky bottom-0"},
         "© 2026 Augmented Engineering UG, Geschäftsführer Julian Vargas.",
-        span("|"),
+        span("|", table()),
         a({href: "https://www.linkedin.com/company/augmented-engineering-ug/", target: "_blank"}, "LinkedIn")
       )
     )
   )
 )
 # while true do
-landing_result = landing.run(config: config, state: initial_state)
-File.open("index.html", "w") { |f| f.write(render_html(landing_result.result.value!)) }
+landing.run(config: config, state: initial_state).result.bind { |vdom|
+
+  raw_html = render_html(vdom)
+  File.open("index.html", "w") { |f| f.write(raw_html) }
+
+}.or { |error| abort "#{error.join(", ")}" }

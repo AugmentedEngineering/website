@@ -35,6 +35,19 @@ Use the `hcanonical` skill (`/hcanonical`) when writing or editing HTML with thi
 2. Avoid unnecessary nesting
 3. Always follow content models as defined in the HTML Living Standard
 
+**Known content-model pitfalls enforced by the DSL:**
+- `<address>` is flow content — it cannot be nested inside `<p>` (phrasing-only). Place it as a sibling of `<p>` instead.
+
+**Monad boilerplate — always end the `bind` block with `Success(nil)`:**
+```ruby
+page.run(config: config, state: initial_state).result.bind { |vdom|
+  raw_html = render_html(vdom)
+  File.open("page.html", "w") { |f| f.write(raw_html) }
+  Success(nil)  # required — File.open returns Integer; .or would blow up without this
+}.or { |error| abort "#{error.join(", ")}" }
+```
+Omitting `Success(nil)` lets the Integer byte-count leak out of `bind`, causing `.or` to raise `NoMethodError` even though the file was written successfully.
+
 ## Workflows
 
 **Page Creation Loop:**

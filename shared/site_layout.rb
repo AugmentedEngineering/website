@@ -7,6 +7,11 @@ require_relative '../styles/main_css.rb'
 
 config = HtmlConfig.new(theme: 'dark', auto_id_prefix: 'field')
 initial_state = 1
+
+def open_graph_json(json)
+  $graph = json
+end
+
 def site_layout(&block)
 document(
   doctype(),
@@ -32,7 +37,7 @@ document(
       meta({ property: "og:image",       content: "#{SITE_URL}/augen-logo.svg" }),
 
       # AAO / AEO: JSON-LD structured data - entity graph for answer engines
-      script({ type: "application/ld+json" }, JSON_LD),
+      $graph ? script({ type: "application/ld+json" }, $graph) : '',
 
       link({ rel: "icon", href: "favicon.ico" }),
       style(CSS)

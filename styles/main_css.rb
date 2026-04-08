@@ -268,4 +268,5 @@ CSS = <<~CSS
     color: #374151;
     border-left: 3px solid #1d4ed8;
     padding-left: 1rem;
+  }
 CSS

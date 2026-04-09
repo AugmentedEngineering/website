@@ -3,6 +3,8 @@ require_relative './shared/site_layout.rb'
 config = HtmlConfig.new(theme: 'dark', auto_id_prefix: 'field')
 initial_state = 1
 
+resource_path("blog.html")
+
 open_graph_json(<<~JSON
   {
     "@context": "https://schema.org",

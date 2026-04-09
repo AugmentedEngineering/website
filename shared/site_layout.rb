@@ -12,6 +12,10 @@ def open_graph_json(json)
   $graph = json
 end
 
+def resource_path(the_path)
+  $path = the_path
+end
+
 def site_layout(&block)
 document(
   doctype(),
@@ -26,13 +30,13 @@ document(
       meta({ name: "robots", content: "index, follow" }),
       # SEO: canonical prevents duplicate-content penalties
       link({ rel: "canonical", href: SITE_URL }),
-      link({ rel: "canonical", href: "#{SITE_URL}/#{__FILE__.gsub("rb", "html")}" }),
+      link({ rel: "canonical", href: "#{SITE_URL}/#{$path}" }),
 
       # GEO / LLMO: Open Graph - used by AI summarisers and social-card generators
       meta({ property: "og:type",        content: "website" }),
       meta({ property: "og:title",       content: "Augmented Engineering UG - Formal Methods & Software Engineering" }),
       meta({ property: "og:description", content: DESCRIPTION }),
-      meta({ property: "og:url",         content: "#{SITE_URL}/#{__FILE__.gsub("rb", "html")}" }),
+      meta({ property: "og:url",         content: "#{SITE_URL}/#{$path}" }),
       meta({ property: "og:site_name",   content: SITE_NAME }),
       meta({ property: "og:image",       content: "#{SITE_URL}/augen-logo.svg" }),
 

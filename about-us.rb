@@ -5,11 +5,15 @@ initial_state = 1
 
 CODE_SAMPLE = ""
 
+resource_path("about-us.html")
+
 about_us = site_layout do
   article(
     h2("About Us"),
-    p("It was the year 2000 when one of my college professors mentioned during a lecture that there was a company that could demonstrate mathematically that their software works. That simple anecdote sparked my curiosity to learn more about the theory and techniques for developing software that was correct by design. This led me on a long journey through Test‑Driven Development, Functional Programming, Abstract Algebra, Category Theory, Formal Methods, and, most recently, Property‑Based Testing."),
-    p("These are the foundations of Augmented Engineering, a space to create software that is secure and correct by design, making invalid states impossible to represent."),
+    p("Augmented Engineering was founded on the principle that software should be correct by design."),
+    p("Our work builds on established disciplines such as Continuous Delivery, Property-based Testing and Formal Methods as operational tools. These methods enable us to construct systems where invalid states are impossible to represent and where correctness is a structural property, not an afterthought."),
+    p("We support organisations that require reliable, iterative progress, enabling them to focus on ther objectives rather than the complexities of the technology."),
+    p("We deliver software that behaves as specified and evolves without surprises."),
     br(),
     br(),
     p({style: "text-align:center; margin:0;"},
